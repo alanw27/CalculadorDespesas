@@ -18,6 +18,9 @@ class ExpensesApp extends StatelessWidget {
 class HomeApp extends StatelessWidget {
   HomeApp({super.key});
 
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
   final _transaction = [
     Transaction(
      id: "t1",
@@ -38,10 +41,9 @@ class HomeApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text("Minhas despesas", style: TextStyle(color: Colors.white),)
+        title: Text("Minhas despesas", style: TextStyle(color: Colors.white),),
         ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
@@ -88,7 +90,7 @@ class HomeApp extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          DateFormat("dd/mm/YYYY", t.date.toString()).toString() ,
+                          DateFormat("dd/mm/YYYY").format(t.date!) ,
                           style: TextStyle(
                             color: Colors.blueGrey[100]
                           ),
@@ -99,6 +101,40 @@ class HomeApp extends StatelessWidget {
                 )
               );
             }).toList(),
+          ),
+          Card(
+            elevation: 5,
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: titleController,
+                    decoration: InputDecoration(
+                      labelText:"Título" 
+                    )
+                  ),
+                  TextField(
+                    controller: valueController,
+                    decoration: InputDecoration(
+                      labelText:"Valor" 
+                    )
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: (){}, 
+                        child: Text(
+                          "Nova Transação",
+                          style: TextStyle(color: Colors.purple)
+                        ),
+                      ),
+                    ],
+                  ),  
+                ],
+              ),
+            ),
           )
         ],
       ),
