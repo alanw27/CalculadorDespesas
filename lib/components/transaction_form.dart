@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 class TransactionForm extends StatelessWidget {
   
   final void Function (String, double) onSubmit;
-  const TransactionForm(this.onSubmit, {super.key});
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
+  TransactionForm(this.onSubmit, {super.key});
+    
+  void _onSubmitted(){
+
+    onSubmit(titleController.text, double.tryParse(valueController.text) ?? 0);
+  }
 
   @override
-  Widget build(BuildContext context) {
-
-    final titleController = TextEditingController();
-    final valueController = TextEditingController();
-    
+  Widget build(BuildContext context) {    
 
     return Card(
             elevation: 5,
@@ -26,6 +30,8 @@ class TransactionForm extends StatelessWidget {
                   ),
                   TextField(
                     controller: valueController,
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    onSubmitted: (_) => _onSubmitted, 
                     decoration: InputDecoration(
                       labelText:"Valor" 
                     )
