@@ -25,18 +25,20 @@ class HomeApp extends StatelessWidget {
         backgroundColor: Colors.blue,
         title: Text("Minhas despesas", style: TextStyle(color: Colors.white),),
         ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            child: Card(
-              color: Colors.blue,
-              elevation: 5,
-              child: Text("Gráfico", style: TextStyle(color: Colors.white),),
-              ),
-          ),
-          TransactionUser()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(
+              child: Card(
+                color: Colors.blue,
+                elevation: 5,
+                child: Text("Gráfico", style: TextStyle(color: Colors.white),),
+                ),
+            ),
+            TransactionUser()
+          ],
+        ),
       ),
     );
   }
