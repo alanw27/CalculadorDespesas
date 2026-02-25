@@ -12,7 +12,28 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 300,
-      child: ListView.builder(
+      child: transactions.isEmpty ? 
+      SizedBox(
+        height: 300,
+        child: Column( 
+          children: [
+            Text(
+              "Nenhuma transação cadastrada",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              height: 200,
+              child: Image.asset(
+                "assets/images/waiting.png",
+                fit: BoxFit.cover,
+              ),
+            )
+          ],
+        ),
+      ) 
+      : 
+      ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (ctx, index) {
         final t = transactions[index];
@@ -26,7 +47,7 @@ class TransactionList extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                       width: 2
                     )
                   ),
@@ -34,7 +55,7 @@ class TransactionList extends StatelessWidget {
                   child: Text(
                     "R\$ ${t.value!.toStringAsFixed(2)}",
                     style: TextStyle(
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 20
                     ),
@@ -45,10 +66,7 @@ class TransactionList extends StatelessWidget {
                   children: [
                     Text(
                       t.title!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium
                     ),
                     Text(
                       DateFormat("dd/mm/YYYY").format(t.date!) ,
