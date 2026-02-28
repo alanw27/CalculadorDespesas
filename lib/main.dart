@@ -29,6 +29,10 @@ class ExpensesApp extends StatelessWidget {
             fontWeight: FontWeight.bold
           )
         ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.amber,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white) 
+        ),
         primarySwatch: Colors.purple ,
         fontFamily: "Quicksand",
         useMaterial3: false,
@@ -72,12 +76,12 @@ class _HomeAppState extends State<HomeApp> {
     );
   }
 
-  void _addTransacion(String title, double value){
+  void _addTransacion(String title, double value, DateTime dt){
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(), 
       title: title, 
       value: value, 
-      date: DateTime.now()
+      date: dt
     );
 
     setState(() {
@@ -85,6 +89,12 @@ class _HomeAppState extends State<HomeApp> {
     });
 
     Navigator.of(context).pop();
+  }
+
+  void _deleteTransaction(String id){
+    transaction.removeWhere((tr) {
+      return tr.id == id;
+    });
   }
 
   @override
@@ -112,12 +122,10 @@ class _HomeAppState extends State<HomeApp> {
           children: [
             SizedBox(
               child: Card(
-                color: Colors.blue,
-                elevation: 5,
                 child: Chart(_recentTransactions),
                 ),
             ),
-            TransactionList(transaction)
+            TransactionList(transaction, _deleteTransaction)
           ],
         ),
       ),
