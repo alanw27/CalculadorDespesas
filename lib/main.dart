@@ -92,8 +92,10 @@ class _HomeAppState extends State<HomeApp> {
   }
 
   void _deleteTransaction(String id){
-    transaction.removeWhere((tr) {
-      return tr.id == id;
+    setState(() {
+      transaction.removeWhere((tr) {
+        return tr.id == id;
+      });
     });
   }
 

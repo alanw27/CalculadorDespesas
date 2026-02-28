@@ -15,7 +15,7 @@ class Chart extends StatelessWidget {
       
       double totalSum = 0;
 
-      for(int i = 0; i < recentTransaction.length; ){
+      for(int i = 0; i < recentTransaction.length; i++){
         bool someDays = recentTransaction[i].date!.day == weekDay.day;
         bool someMonth = recentTransaction[i].date!.month == weekDay.month;
         bool someYear = recentTransaction[i].date!.year == weekDay.year;
